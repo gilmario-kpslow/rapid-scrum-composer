@@ -2,8 +2,6 @@ version: '3.7'
 services:
   rapid-scrum:
     container_name: rapidscrum
-    environment:
-      BUILD: 'prod'
     build: 
       context: rapid-scrum/
     ports:

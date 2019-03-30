@@ -23,5 +23,5 @@ docker-compose up -d
 
 - Executar o sistema forçando o build
 ```
-docker-compose up --build -d
+docker-compose build --no-cache
 ```
