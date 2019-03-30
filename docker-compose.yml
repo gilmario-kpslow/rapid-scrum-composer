@@ -1,0 +1,39 @@
+version: '3.7'
+services:
+  rapid-scrum:
+    container_name: rapidscrum
+    environment:
+      BUILD: 'prod'
+    build: 
+      context: rapid-scrum/
+    ports:
+     - "80:80"
+    expose:
+      - "80"
+  rapidscrum-api:
+    container_name: rapidscrum-api
+    build: rapid-scrum-api/
+    ports:
+      - "8080:8080"
+    depends_on:
+      - rapidscrumdb
+    networks:
+      - backend
+
+  rapidscrumdb:
+    container_name: rapidscrumdb
+    image: "postgres:11"
+    expose:
+      - "5432"
+    volumes:
+      - db-data:/var/lib/postgresql/data
+    networks:
+      - backend
+    environment:
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_DB=rapidscrumdb
+
+networks:
+  backend:
+volumes:
+  db-data:
